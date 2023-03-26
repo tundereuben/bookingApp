@@ -1,0 +1,63 @@
+<table class="table table-bordered table-striped">
+  <tbody>
+  <tr>
+    <th>
+      <span class="title">Invoice no: </span>
+      <span class="text-success">#123ABF</span>
+    </th>
+    <th colspan="2">
+      <span class="title">Payment status: </span>
+      <span class="text-success">{{ paymentStatus | uppercase }} </span>
+      <span class="title">(NGN 8,372.00)</span>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <span class="title">First name</span> <br>
+      {{ user?.firstName }}
+    </td>
+    <td>
+      <span class="title">Last Name</span> <br>
+      {{ user?.lastName }}
+    </td>
+    <td>
+      <span class="title">Gender</span> <br>
+      {{ user?.gender | titlecase }}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <span class="title">Mobile</span> <br>
+      {{ user?.mobile }}
+    </td>
+    <td colspan="2">
+      <span class="title">Email</span> <br>
+      {{ user?.email }}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <span class="title">Appointment Date</span> <br>
+      {{ booking?.date | date }}
+    </td>
+    <td>
+      <span class="title">From</span> <br>
+      {{ booking?.time }}
+    </td>
+    <td>
+      <span class="title">To</span> <br>
+      {{ booking?.time }}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <span class="title">Purpose of visit</span> <br>
+      {{ booking?.purposeOfVisit }}
+    </td>
+    <td colspan="2">
+      <span class="title">Message</span> <br>
+      {{ booking?.message }}
+    </td>
+  </tr>
+  </tbody>
+</table>

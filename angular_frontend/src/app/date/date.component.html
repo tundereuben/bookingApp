@@ -1,0 +1,156 @@
+<!--<form [formGroup]="dateForm">
+  <div class="mb-3">
+    <h5 *ngIf="selectedDate">Selected Date: {{ selectedDate | date }}</h5>
+    <p-calendar
+      [inline]="true"
+      [defaultDate]="null"
+      formControlName="date"
+      (click)="pickDate()"
+    >
+    </p-calendar>
+  </div>
+</form>
+
+<a routerLink="/home" class="btn btn-link">Back</a>
+<a (click)="gotoNextPage()" class="btn btn-link">Continue</a>-->
+
+<section id="date">
+  <div class="container">
+    <form [formGroup]="appointmentForm">
+      <h6>Personal Details</h6>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="First name"
+            aria-label="First name"
+            formControlName="firstname"
+          >
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Last name"
+            aria-label="Last name"
+            formControlName="lastname"
+          >
+        </div>
+        <div class="col">
+          <span class="gender">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="gender"
+              value="male"
+              id="male"
+            >
+            <label class="form-check-label" for="male">
+             &nbsp; Male
+            </label>
+          </span>
+          <span class="gender">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="gender"
+              value="female"
+              id="female"
+            >
+            <label class="form-check-label" for="female">
+              &nbsp; Female
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Mobile"
+            aria-label="mobile"
+            formControlName="mobile"
+          >
+        </div>
+        <div class="col">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            aria-label="email"
+            formControlName="email"
+          >
+        </div>
+      </div>
+
+      <!--<hr>-->
+      <h6 class="mt-5">Appointment Details</h6>
+      <div class="row mt-3">
+        <div class="col">
+          <input
+            type="date"
+            class="form-control"
+            placeholder="Date of Appointment"
+            aria-label="appointmentDate"
+            formControlName="appointmentDate"
+          >
+        </div>
+        <div class="col">
+          <input
+            type="time"
+            class="form-control"
+            placeholder="From"
+            aria-label="fromTime"
+            formControlName="fromTime"
+          >
+        </div>
+        <div class="col">
+          <input
+            type="time"
+            class="form-control"
+            placeholder="To"
+            aria-label="to"
+            formControlName="toTime"
+          >
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Purpose of Visit"
+            aria-label="purpose"
+            formControlName="purposeOfVisit"
+          >
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <textarea
+            class="form-control"
+            placeholder="Message"
+            formControlName="message"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-sm-3 offset-sm-9">
+          <a routerLink="/" class="btn btn-secondary btn-sm">Cancel</a>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="proceedToPayment()"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>

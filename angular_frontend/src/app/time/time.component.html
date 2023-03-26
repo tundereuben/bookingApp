@@ -1,0 +1,15 @@
+<div>
+  <ul *ngFor="let slice of fullDay">
+    <li
+      (click)="selectTime(slice)"
+      [ngClass]="{'active': slice.isSelected}"
+      >
+      {{ slice.time }} - {{ slice.time + 1 }}
+    </li>
+  </ul>
+
+  <!--<p-calendar [showTime]="true" hourFormat="12"></p-calendar>-->
+
+  <a class="btn btn-link" (click)="goToPrevious()">Back</a>
+  <a (click)="continueToUserDetails()" class="btn btn-link">Continue</a>
+</div>

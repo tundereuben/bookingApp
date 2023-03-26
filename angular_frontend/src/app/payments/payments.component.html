@@ -1,0 +1,95 @@
+<div class="container">
+
+  <div class="row my-3">
+
+    <!--<div class="col-sm-8 offset-sm-2">
+      <div *ngIf="hasMadePayment" class="alert alert-success">
+        <p>Payment successful!</p>
+        <p>Booking details sent to your email.</p>
+      </div>
+    </div>-->
+
+    <ng-container *ngIf="!hasMadePayment">
+      <div class="col-sm-2 offset-sm-6" >
+        <button  class="btn btn-warning btn-sm text-white" (click)="backToPrevious()">
+          Edit Details
+        </button>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success btn-sm" (click)="makePayment()">
+          Make Payment
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="hasMadePayment">
+      <div class="row">
+        <div class="col-sm-2 offset-sm-8">
+          <button  class="btn btn-success btn-sm" (click)="openModal()">
+            Download receipt
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <div style="background: #ecf0f5; padding: 10px">
+      <br>
+      <div class="col-sm-8 offset-sm-2 my-1">
+        <app-booking-details
+          [booking]="booking"
+          [user]="user"
+          [paymentStatus]="paymentStatus"
+        ></app-booking-details>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div>
+    <a class="btn btn-link" (click)="backToPrevious()">Back</a>
+    <a class="btn btn-link" routerLink="/">Home</a>
+    <a class="btn btn-link" >Finish</a>
+  </div> -->
+
+</div>
+
+
+<!--payment-success-modal-->
+<button style="display: none" type="button"
+        class="btn btn-primary" id="paymentModal" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLabel">SUCCESS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background: #b3ffcc">
+
+        <div id="bookingDetails" style="background: #b3ffcc">
+          <h5 class="text-center">Booking Details</h5>
+          <app-booking-details
+            [booking]="booking"
+            [user]="user"
+            [paymentStatus]="paymentStatus"
+          ></app-booking-details>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-success btn-sm" (click)="downloadBookingDetails()">Download </button>
+          </div>
+        </div>
+      </div>
+      <!--<div class="modal-footer">
+
+      </div>-->
+    </div>
+  </div>
+</div>

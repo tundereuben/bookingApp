@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*.container {
+  margin: 40px auto 10px;
+  max-width: 1020px;
+  min-height: 80vh;
+  border: solid 1px #eee;
+  border-radius: 10px;
+  background: #eee;
+}
+
+#home {
+  margin: 30vh auto;
+  text-align: center;
+}*/
+
+body {
+  background: #ecf0f5;
+  padding: 20px;
+}
+
+#page-wrapper {
+
+}
+
+#home-cover .call-to-action {
+  text-transform: capitalize;
+  color: #2e37a4;
+  margin-top: 25vh;
+}
+
+#home-cover .call-to-action h1 {
+  line-height: 60px;
+}
+
+#home-cover .call-to-action > .btn {
+  margin-top: 40px;
+  margin-right: 10px;
+  border: none;
+
+}
+
+#home-cover .call-to-action > .make-appointment {
+  color: #fff;
+  background: #2e37a4;
+}
+
+#home-cover .call-to-action > .make-appointment:hover {
+  color: #2e37a4;
+  background: #fff;
+  border: solid 1px #2e37a4;
+}
+
+#home-cover .call-to-action > .check-booking {
+  border: solid 1px #2e37a4;
+  color: #2e37a4;
+}
+
+#home-cover .call-to-action > .check-booking:hover {
+  background: #2e37a4;
+  color: #fff;
+}
+
+#home-cover #home-image img{
+  width: 500px;
+  margin-top: 25vh;
+  border-radius: 10px;
+}
+
+//date page
+#date {
+  width: 90%;
+  background: #fff;
+  margin: 20px auto;
+  padding: 20px 20px;
+  border-radius: 10px;
+}
+
+#date h6 {
+  color: #2e37a4;
+}
+
+#date .gender {
+  margin-right: 20px;
+}
+
+#date .btn {
+  padding: 5px 20px;
+  margin-right: 10px;
+}
+
+#date .btn-primary {
+  background: #2e37a4;
+  color: #fff;
+}

@@ -1,0 +1,27 @@
+<section id="home-cover">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="call-to-action">
+        <h1>Take a test within 2 minutes when you book ahead.</h1>
+        <button
+          type="button"
+          class="btn btn-sm btn-primary make-appointment"
+          (click)="gotoBookingPage()"
+        >
+          Make an Appointment
+        </button>
+        <a
+          type="button"
+          class="btn btn-sm btn-outline-primary check-booking"
+          routerLink="check-booking"
+        >
+          Check existing booking
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-4" id="home-image">
+      <img src="assets/images/lab-image.jpg">
+    </div>
+  </div>
+</section>
+

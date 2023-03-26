@@ -1,0 +1,24 @@
+<form [formGroup]="userForm">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">First name</label>
+      <input formControlName="firstname"  type="text" class="form-control" id="firstname" aria-describedby="emailHelp">
+    </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Last name</label>
+    <input formControlName="lastname" type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+  </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Phone</label>
+      <input formControlName="mobile" type="text" class="form-control" id="mobile">
+    </div>
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Additional details</label>
+      <textarea formControlName="message" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+    </div>
+    <a class="btn btn-link" (click)="goToPrevious()">Back</a>
+    <button class="btn btn-link" (click)="submitForm()" type="submit">Continue</button>
+  </form>
