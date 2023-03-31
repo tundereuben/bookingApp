@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {BookingService} from "../services/booking.service";
-import {Booking} from "../shared/models/models";
+import {BookingService} from "../../services/booking.service";
+import {Booking} from "../../shared/models/models";
 
 @Component({
   selector: 'app-check-booking',
@@ -36,7 +36,7 @@ export class CheckBookingComponent implements OnInit {
     const bookingId = formValues.bookingId;
     this.bookService.getBooking(bookingId)
       .subscribe(res => {
-        // this.bookings = res;
+        this.bookings = [res];
         console.log(this.bookings)
       });
   }

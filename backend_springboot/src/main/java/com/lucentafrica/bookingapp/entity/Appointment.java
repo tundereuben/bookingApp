@@ -19,8 +19,8 @@ public class Appointment {
     @Column(name = "time")
     private String time;
 
-    @Column(name = "booking_id")
-    private String bookingId;
+    @Column(name = "appointment_id")
+    private String appointmentId;
 
     @Column(name = "payment_status")
     private String paymentStatus;

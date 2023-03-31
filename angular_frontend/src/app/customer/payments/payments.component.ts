@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {BookingService} from "../services/booking.service";
-import {Booking, User} from "../shared/models/models";
+import {BookingService} from "../../services/booking.service";
+import {Booking, User} from "../../shared/models/models";
 import * as htmlToImage from 'html-to-image';
 import * as FileSaver from 'file-saver';
 
@@ -13,7 +13,7 @@ import * as FileSaver from 'file-saver';
 export class PaymentsComponent implements OnInit {
 
   public hasMadePayment: boolean = false;
-  public bookingId: string;
+  public appointmentId: string;
   public booking: Booking;
   public user: User;
   public paymentStatus: string = 'pending';
@@ -26,15 +26,15 @@ export class PaymentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe(params => {
-      this.bookingId = params.get('bookingId');
-      this.getBooking(this.bookingId);
-      console.log(`bookingID >>>`, params, this.bookingId);
+      this.appointmentId = params.get('bookingId');
+      this.getBooking(this.appointmentId);
+      console.log(`bookingID >>>`, params, this.appointmentId);
     });
   }
 
   makePayment(): void {
     this.hasMadePayment = true;
-    this.bookingService.getBooking(this.bookingId)
+    this.bookingService.getBooking(this.appointmentId)
       .subscribe(booking => {
         const bookingToUpdate = booking[0];
         bookingToUpdate.paymentStatus = 'paid';
@@ -58,10 +58,10 @@ export class PaymentsComponent implements OnInit {
   }
 
   backToPrevious() {
-    this.router.navigate(['/date'],
+    this.router.navigate(['/appointment'],
       {queryParams:
           {
-            bookingId: this.bookingId,
+            appointmentId: this.appointmentId,
             userId: this.user.userId,
             editBooking: true
           }

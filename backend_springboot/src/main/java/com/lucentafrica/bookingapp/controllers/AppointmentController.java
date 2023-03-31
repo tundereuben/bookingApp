@@ -24,9 +24,9 @@ public class AppointmentController {
         return appointmentService.findById(id);
     }
 
-    @GetMapping("/s/{bookingId}")
-    public Appointment getAppointmentByBookingId(@PathVariable String bookingId) {
-        Appointment result = appointmentService.findByBookingId(bookingId);
+    @GetMapping("/s/{appointmentId}")
+    public Appointment getAppointmentByAppointmentId(@PathVariable String appointmentId) {
+        Appointment result = appointmentService.findByAppointmentId(appointmentId);
         return result;
     }
 

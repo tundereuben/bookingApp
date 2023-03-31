@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BookingService } from '../services/booking.service';
+import { BookingService } from '../../services/booking.service';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Booking, User} from "../shared/models/models";
+import {Booking, User} from "../../shared/models/models";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -84,7 +84,7 @@ export class UserDetailsComponent implements OnInit {
     const booking: Booking = {
       date: this.booking.date,
       id: this.booking.id,
-      bookingId: this.booking.bookingId,
+      appointmentId: this.booking.appointmentId,
       paymentStatus: "pending",
       time: this.booking.time,
       userId: this.booking?.userId,
@@ -93,7 +93,7 @@ export class UserDetailsComponent implements OnInit {
 
     this.bookingService.updateBooking(booking).subscribe(updatedBooking => {
       console.log(`successfully updated booking with user ID`, updatedBooking);
-      this.router.navigate([`/make-payment`], { queryParams: { bookingId: booking.bookingId } });
+      this.router.navigate([`/make-payment`], { queryParams: { bookingId: booking.appointmentId } });
     })
   }
 

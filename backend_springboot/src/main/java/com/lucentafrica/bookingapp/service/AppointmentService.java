@@ -15,5 +15,6 @@ public interface AppointmentService {
 
     void deleteById(Long appointmentId);
 
-    Appointment findByBookingId(String appointmentId);
+    Appointment findByAppointmentId(String appointmentId);
+
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Booking, User} from "../shared/models/models";
+import {Booking, User} from "../../shared/models/models";
 
 @Component({
   selector: 'app-booking-details',

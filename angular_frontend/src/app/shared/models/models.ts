@@ -9,7 +9,7 @@ export interface CalendarDay {
 
 export interface Booking {
   id?: number;
-  bookingId?: string;
+  appointmentId?: string;
   date?: string;
   time?: string;
   userId: string;
@@ -31,4 +31,6 @@ export interface User {
   gender?: string;
   tenantId?: string;
   dateCreated?: string;
+  password?: string // todo: remove this;
+  role?: string
 }

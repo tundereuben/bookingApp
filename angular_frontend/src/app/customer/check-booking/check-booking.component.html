@@ -3,7 +3,7 @@
     <form [formGroup]="searchBookingForm">
       <h6>Search Booking</h6>
       <div class="row">
-        <div class="col">
+        <!--<div class="col">
           <input
             type="text"
             class="form-control"
@@ -11,7 +11,7 @@
             aria-label="invoice number"
             formControlName="invoiceNumber"
           >
-        </div>
+        </div>-->
         <div class="col">
           <input
             type="email"
@@ -73,11 +73,11 @@
           <th>Options</th>
         </tr>
         <tr *ngFor="let booking of bookings">
-          <td>{{ booking.date | date }}</td>
-          <td>{{ booking.time }}</td>
-          <td>{{ booking.time }}</td>
-          <td>{{ booking.purposeOfVisit }}</td>
-          <td>{{ booking.message }}</td>
+          <td>{{ booking?.date | date }}</td>
+          <td>{{ booking?.time }}</td>
+          <td>{{ booking?.time }}</td>
+          <td>{{ booking?.purposeOfVisit }}</td>
+          <td>{{ booking?.message }}</td>
           <td>
             <a (click)="gotoBooking(booking)" class="btn btn-link">More</a>
           </td>

@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Route, Router} from "@angular/router";
-import {BookingService} from "../services/booking.service";
-import {Booking, User} from "../shared/models/models";
+import {ActivatedRoute, Router} from "@angular/router";
+import {BookingService} from "../../services/booking.service";
+import {Booking, User} from "../../shared/models/models";
 
 @Component({
-  selector: 'app-date',
-  templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss']
+  selector: 'app-appointment',
+  templateUrl: './appointment.component.html',
+  styleUrls: ['./appointment.component.scss']
 })
-export class DateComponent implements OnInit {
+export class AppointmentComponent implements OnInit {
+
   public appointmentForm: FormGroup;
-  public selectedDate: string;
-  public highlightedDate: Date;
+  private isEditBooking: boolean = false;
   public booking: Booking;
   public bookingId: string;
-  private formValues: any;
+  public highlightedDate: Date;
   public user: User;
-  private isEditBooking: boolean = false;
-
+  private formValues: any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -31,13 +30,13 @@ export class DateComponent implements OnInit {
     this.createAppointmentForm();
 
     this.activatedRoute.queryParamMap.subscribe(params => {
-      const bookingId = params.get('bookingId');
-      if (bookingId) {
-        this.getBooking(bookingId);
+      const appointmentId = params.get('appointmentId');
+      if (appointmentId) {
+        this.getBooking(appointmentId);
         this.isEditBooking = true;
       }
+      console.log(appointmentId);
     });
-
   }
 
   createAppointmentForm() {
@@ -55,65 +54,13 @@ export class DateComponent implements OnInit {
     });
   }
 
-  /*pickDate() {
-    const rawValue = this.dateForm.getRawValue().date;
-    this.selectedDate = new Date(rawValue).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) ;
-    console.log(`selectedDate`, this.selectedDate)
-  }*/
-
-  gotoNextPage() {
-    let booking;
-    console.log(!this.bookingId)
-    if (this.bookingId === undefined) {
-      booking = {
-        date: this.selectedDate,
-        id: 0,
-        bookingId: this.bookService.generateId(16),
-        paymentStatus: "",
-        time: "",
-        userId: 0
-      }
-      this.saveBooking(booking);
-    } else {
-      booking = this.booking;
-      booking.date = this.selectedDate ? this.selectedDate : this.booking.date;
-      this.updateBooking(booking);
-    }
-  }
-
-  updateBooking(booking: Booking) {
-    this.bookService.updateBooking(booking).subscribe(data => {
-      this.router.navigate([`/make-payment`], { queryParams: { bookingId: data.bookingId }})
-    })
-  }
-
-  private updateUser(user: User) {
-    this.bookService.updateUser(user)
-      .subscribe(data => {
-        console.log(`updated user details >>>`, user);
-      })
-  }
-
-  saveBooking(booking: Booking) {
-    this.bookService.saveBooking(booking).subscribe(data => {
-      console.log(`created booking >>>`, data);
-      this.router.navigate([`/make-payment`],
-        { queryParams:
-            {
-              bookingId: data.bookingId,
-              userId: this.user.userId
-            },
-        }
-      );
-    });
-  }
-
   private getBooking(bookingId: string) {
     this.bookService.getBooking(bookingId)
       .subscribe(res => {
-        this.booking = res[0]
+        this.booking = res
         this.bookingId = bookingId;
         this.highlightedDate = new Date(this.booking.date);
+        console.log(res);
         this.patchBookingValues();
       })
   }
@@ -129,16 +76,6 @@ export class DateComponent implements OnInit {
     this.getUser();
   }
 
-  private patchUserValues() {
-    this.appointmentForm.patchValue({
-      firstname: this.user.firstName,
-      lastname: this.user.lastName,
-      gender: this.user.gender,
-      mobile: this.user.mobile,
-      email: this.user.email,
-    })
-  }
-
   private getUser() {
     this.bookService.getUser(this.booking.userId)
       .subscribe(data => {
@@ -148,13 +85,22 @@ export class DateComponent implements OnInit {
       });
   }
 
+  private patchUserValues() {
+    this.appointmentForm.patchValue({
+      firstname: this.user.firstName,
+      lastname: this.user.lastName,
+      gender: this.user.gender,
+      mobile: this.user.mobile,
+      email: this.user.email,
+    });
+  }
 
   proceedToPayment() {
     this.formValues = this.appointmentForm.getRawValue();
     if (this.isEditBooking) {
       const booking: Booking = {
         id: this.booking.id,
-        bookingId: this.booking.bookingId,
+        appointmentId: this.booking.appointmentId,
         date: this.formValues.appointmentDate,
         message: this.formValues.message,
         paymentStatus: this.booking.paymentStatus,
@@ -167,13 +113,17 @@ export class DateComponent implements OnInit {
       }
 
       const user: User = {
-        email: this.formValues.email,
-        firstName: this.formValues.firstname,
-        gender: this.formValues.gender,
         id: this.user.id,
+        firstName: this.formValues.firstname,
         lastName: this.formValues.lastname,
+        email: this.formValues.email,
+        gender: this.formValues.gender,
         mobile: this.formValues.mobile,
-        userId: this.user.userId
+        tenantId: this.user.tenantId,
+        userId: this.user.userId,
+        dateCreated: this.user.dateCreated,
+        password: this.user.password,
+        role: this.user.role
       }
 
       this.updateUser(user);
@@ -202,7 +152,7 @@ export class DateComponent implements OnInit {
 
         this.user = user;
         const booking: Booking = {
-          bookingId: this.bookService.generateId(16),
+          appointmentId: this.bookService.generateId(16),
           date: this.formValues.appointmentDate,
           message: this.formValues.message,
           paymentStatus: 'pending',
@@ -215,6 +165,33 @@ export class DateComponent implements OnInit {
         }
         this.saveBooking(booking);
 
+      })
+  }
+
+  saveBooking(booking: Booking) {
+    this.bookService.saveBooking(booking).subscribe(data => {
+      console.log(`created booking >>>`, data);
+      this.router.navigate([`/make-payment`],
+        { queryParams:
+            {
+              bookingId: data.appointmentId,
+              userId: this.user.userId
+            },
+        }
+      );
+    });
+  }
+
+  updateBooking(booking: Booking) {
+    this.bookService.updateBooking(booking).subscribe(data => {
+      this.router.navigate([`/make-payment`], { queryParams: { bookingId: data.appointmentId }})
+    })
+  }
+
+  private updateUser(user: User) {
+    this.bookService.updateUser(user)
+      .subscribe(data => {
+        console.log(`updated user details >>>`, user);
       })
   }
 

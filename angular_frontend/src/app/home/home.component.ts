@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   gotoBookingPage() {
-    this.router.navigate(['/date']);
+    this.router.navigate(['/appointment']);
   }
 
 }

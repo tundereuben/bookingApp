@@ -44,9 +44,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment findByBookingId(String appointmentId) {
+    public Appointment findByAppointmentId(String appointmentId) {
 
-        Appointment result = appointmentRepository.findByBookingId(appointmentId);
+        Appointment result = appointmentRepository.findByAppointmentId(appointmentId);
 
         Appointment appointment = null;
 

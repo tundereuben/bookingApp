@@ -35,7 +35,7 @@ export class BookingService {
   }
 
   updateBooking(booking: Booking): Observable<Booking> {
-    return this.http.put<Booking>(`${this.baseUrl}/appointments/${booking.id}`,
+    return this.http.put<Booking>(`${this.baseUrl}/appointments`,
       JSON.stringify(booking), {headers: this.headers});
   }
 
@@ -64,7 +64,7 @@ export class BookingService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/users/${user.id}`,
+    return this.http.put<User>(`${this.baseUrl}/customers`,
       JSON.stringify(user), {headers: this.headers});
   }
 
