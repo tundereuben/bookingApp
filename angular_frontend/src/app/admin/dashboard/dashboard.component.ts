@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from 'src/app/services/booking.service';
+import {Appointment} from "../../shared/models/appointment";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,7 @@ import { BookingService } from 'src/app/services/booking.service';
 })
 export class DashboardComponent implements OnInit {
 
-  bookings: any[] = []
+  appointments: Appointment[] = []
 
   constructor(
     private bookingService: BookingService
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
   getAllBookings() {
     this.bookingService.getAllBookings()
     .subscribe(data => {
-      this.bookings = data;
+      this.appointments = data;
       console.log(`all bookings >>>`, data);
     })
   }

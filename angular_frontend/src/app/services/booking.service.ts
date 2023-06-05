@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Booking, User} from "../shared/models/models";
+import {Appointment} from "../shared/models/appointment";
 
 
 
@@ -25,18 +26,18 @@ export class BookingService {
     return this.http.get<any>(`${this.baseUrl}/appointments`);
   }
 
-  getBooking(bookingId: string): Observable<Booking> {
-    return this.http.get<Booking>(`${this.baseUrl}/appointments/s/${bookingId}`, { headers: this.headers });
+  getBooking(appointmentId: string): Observable<Appointment> {
+    return this.http.get<Appointment>(`${this.baseUrl}/appointments/s/${appointmentId}`, { headers: this.headers });
   }
 
 
-  saveBooking(booking: Booking): Observable<Booking> {
-    return this.http.post<Booking>(`${this.baseUrl}/appointments`, JSON.stringify(booking), { headers: this.headers } );
+  saveBooking(booking: Appointment): Observable<Appointment> {
+    return this.http.post<Appointment>(`${this.baseUrl}/appointments`, JSON.stringify(booking), { headers: this.headers } );
   }
 
-  updateBooking(booking: Booking): Observable<Booking> {
-    return this.http.put<Booking>(`${this.baseUrl}/appointments`,
-      JSON.stringify(booking), {headers: this.headers});
+  updateBooking(appointment: Appointment): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.baseUrl}/appointments`,
+      JSON.stringify(appointment), {headers: this.headers});
   }
 
   deleteBooking() {
@@ -74,7 +75,8 @@ export class BookingService {
 
   generateId(length: number): string {
     let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    // const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = '0123456789';
     const charactersLength = characters.length;
     let counter = 0;
     while (counter < length) {

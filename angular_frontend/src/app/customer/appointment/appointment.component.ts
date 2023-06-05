@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BookingService} from "../../services/booking.service";
 import {Booking, User} from "../../shared/models/models";
+import {Appointment} from "../../shared/models/appointment";
 
 @Component({
   selector: 'app-appointment',
@@ -14,6 +15,7 @@ export class AppointmentComponent implements OnInit {
   public appointmentForm: FormGroup;
   private isEditBooking: boolean = false;
   public booking: Booking;
+  public appointment: Appointment;
   public bookingId: string;
   public highlightedDate: Date;
   public user: User;
@@ -57,7 +59,8 @@ export class AppointmentComponent implements OnInit {
   private getBooking(bookingId: string) {
     this.bookService.getBooking(bookingId)
       .subscribe(res => {
-        this.booking = res
+        // this.booking = res;
+        this.appointment = res;
         this.bookingId = bookingId;
         this.highlightedDate = new Date(this.booking.date);
         console.log(res);
@@ -73,19 +76,19 @@ export class AppointmentComponent implements OnInit {
       purposeOfVisit: this.booking.purposeOfVisit,
       message: this.booking.message,
     });
-    this.getUser();
+    // this.getUser();
   }
 
-  private getUser() {
+  /*private getUser() {
     this.bookService.getUser(this.booking.userId)
       .subscribe(data => {
         this.user = data;
         console.log(`user >>> `, this.user);
         this.patchUserValues();
       });
-  }
+  }*/
 
-  private patchUserValues() {
+  /*private patchUserValues() {
     this.appointmentForm.patchValue({
       firstname: this.user.firstName,
       lastname: this.user.lastName,
@@ -93,9 +96,42 @@ export class AppointmentComponent implements OnInit {
       mobile: this.user.mobile,
       email: this.user.email,
     });
+  }*/
+
+  saveAppointment() {
+    const formValues = this.appointmentForm.getRawValue();
+    console.log(`appointment details >>> `, formValues);
+    const appointment: Appointment = {
+      appointmentId: this.bookService.generateId(16),
+      date: formValues.appointmentDate,
+      dateCreated: String(new Date()),
+      email: formValues.email,
+      firstName: formValues.firstname,
+      gender: formValues.gender,
+      id: 0,
+      lastEdited: String(new Date()),
+      lastName: formValues.lastname,
+      message: formValues.message,
+      mobile: formValues.mobile,
+      paymentStatus: 'pending',
+      purposeOfVisit: formValues.purposeOfVisit,
+      tenantId: 'from_url_source',
+      time: formValues.fromTime
+    }
+
+    console.log(`booking to save >>>`, appointment);
+
+    this.bookService.saveBooking(appointment)
+      .subscribe(res => {
+        console.log(`Saved appointment >>>`, res);
+
+        this.router.navigate([`/make-payment`],
+          {queryParams: { appointmentId: res.appointmentId }}
+        );
+      });
   }
 
-  proceedToPayment() {
+  /*proceedToPayment() {
     this.formValues = this.appointmentForm.getRawValue();
     if (this.isEditBooking) {
       const booking: Booking = {
@@ -127,13 +163,13 @@ export class AppointmentComponent implements OnInit {
       }
 
       this.updateUser(user);
-      this.updateBooking(booking);
+      this.updateBooking(appointment);
     } else {
       this.saveUser()
     }
-  }
+  }*/
 
-  saveUser() {
+  /*saveUser() {
 
     let userToSave: User = {
       email: this.formValues.email,
@@ -163,12 +199,12 @@ export class AppointmentComponent implements OnInit {
           dateCreated: "a",
           lastEdited: "a"
         }
-        this.saveBooking(booking);
+        // this.saveBooking(booking);
 
       })
-  }
+  }*/
 
-  saveBooking(booking: Booking) {
+  /*saveBooking(booking: Booking) {
     this.bookService.saveBooking(booking).subscribe(data => {
       console.log(`created booking >>>`, data);
       this.router.navigate([`/make-payment`],
@@ -180,19 +216,19 @@ export class AppointmentComponent implements OnInit {
         }
       );
     });
-  }
+  }*/
 
-  updateBooking(booking: Booking) {
-    this.bookService.updateBooking(booking).subscribe(data => {
+  updateBooking(appointment: Appointment) {
+    this.bookService.updateBooking(appointment).subscribe(data => {
       this.router.navigate([`/make-payment`], { queryParams: { bookingId: data.appointmentId }})
     })
   }
 
-  private updateUser(user: User) {
+  /*private updateUser(user: User) {
     this.bookService.updateUser(user)
       .subscribe(data => {
         console.log(`updated user details >>>`, user);
       })
-  }
+  }*/
 
 }

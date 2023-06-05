@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Booking, User} from "../../shared/models/models";
+import {Appointment} from "../../shared/models/appointment";
 
 @Component({
   selector: 'app-booking-details',
@@ -8,8 +9,8 @@ import {Booking, User} from "../../shared/models/models";
 })
 export class BookingDetailsComponent implements OnInit {
 
-  @Input() booking: Booking;
-  @Input() user: User;
+  @Input() appointment: Appointment;
+  // @Input() user: User;
   @Input() paymentStatus;
 
   constructor() { }

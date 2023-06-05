@@ -91,10 +91,10 @@ export class UserDetailsComponent implements OnInit {
       message: message
     }
 
-    this.bookingService.updateBooking(booking).subscribe(updatedBooking => {
+    /*this.bookingService.updateBooking(booking).subscribe(updatedBooking => {
       console.log(`successfully updated booking with user ID`, updatedBooking);
       this.router.navigate([`/make-payment`], { queryParams: { bookingId: booking.appointmentId } });
-    })
+    })*/
   }
 
   goToPrevious() {

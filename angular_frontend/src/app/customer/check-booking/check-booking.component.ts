@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {BookingService} from "../../services/booking.service";
 import {Booking} from "../../shared/models/models";
+import {Appointment} from "../../shared/models/appointment";
 
 @Component({
   selector: 'app-check-booking',
@@ -12,7 +13,7 @@ import {Booking} from "../../shared/models/models";
 export class CheckBookingComponent implements OnInit {
 
   public searchBookingForm: FormGroup;
-  public bookings: Booking[];
+  public bookings: Appointment[] = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -33,17 +34,18 @@ export class CheckBookingComponent implements OnInit {
 
   findBooking() {
     const formValues = this.searchBookingForm.getRawValue();
+    console.log(formValues);
     const bookingId = formValues.bookingId;
     this.bookService.getBooking(bookingId)
-      .subscribe(res => {
+      .subscribe((res) => {
         this.bookings = [res];
         console.log(this.bookings)
       });
   }
 
-  gotoBooking(booking: Booking) {
+  gotoBooking(booking: Appointment) {
     const OTP = this.bookService.generateOTP();
-    // this.router.navigate([`/make-payment`], { queryParams: { bookingId: booking.bookingId }})
+    this.router.navigate([`/make-payment`], { queryParams: { appointmentId: booking.appointmentId }})
   }
 
 }

@@ -103,7 +103,7 @@ export class BookingComponent implements OnInit {
     console.log(`selected day >>>`, this.daysToDisplay[index]);
   }
 
-  continueToTime() {
+  /*continueToTime() {
     this.bookService.saveBooking(this.booking).subscribe(data => {
       const extras = {
         booking: data
@@ -112,7 +112,7 @@ export class BookingComponent implements OnInit {
     })
 
     this.router.navigate(['/time']);
-  }
+  }*/
 
   gotoPrevNext(prevNext: string) {
     this.currMonth = prevNext === 'prev' ? this.currMonth - 1 : this.currMonth + 1;

@@ -3,7 +3,7 @@
   <tr>
     <th>
       <span class="title">Invoice no: </span>
-      <span class="text-success">#123ABF</span>
+      <span class="text-success">{{ appointment?.appointmentId }}</span>
     </th>
     <th colspan="2">
       <span class="title">Payment status: </span>
@@ -14,49 +14,49 @@
   <tr>
     <td>
       <span class="title">First name</span> <br>
-      {{ user?.firstName }}
+      {{ appointment?.firstName }}
     </td>
     <td>
       <span class="title">Last Name</span> <br>
-      {{ user?.lastName }}
+      {{ appointment?.lastName }}
     </td>
     <td>
       <span class="title">Gender</span> <br>
-      {{ user?.gender | titlecase }}
+      {{ appointment?.gender | titlecase }}
     </td>
   </tr>
   <tr>
     <td>
       <span class="title">Mobile</span> <br>
-      {{ user?.mobile }}
+      {{ appointment?.mobile }}
     </td>
     <td colspan="2">
       <span class="title">Email</span> <br>
-      {{ user?.email }}
+      {{ appointment?.email }}
     </td>
   </tr>
   <tr>
     <td>
       <span class="title">Appointment Date</span> <br>
-      {{ booking?.date | date }}
+      {{ appointment?.date | date }}
     </td>
     <td>
       <span class="title">From</span> <br>
-      {{ booking?.time }}
+      {{ appointment?.time }}
     </td>
     <td>
       <span class="title">To</span> <br>
-      {{ booking?.time }}
+      {{ appointment?.time }}
     </td>
   </tr>
   <tr>
     <td>
       <span class="title">Purpose of visit</span> <br>
-      {{ booking?.purposeOfVisit }}
+      {{ appointment?.purposeOfVisit }}
     </td>
     <td colspan="2">
       <span class="title">Message</span> <br>
-      {{ booking?.message }}
+      {{ appointment?.message }}
     </td>
   </tr>
   </tbody>

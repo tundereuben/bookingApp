@@ -15,6 +15,7 @@ import {AdminModule} from "./admin/admin.module";
 import { BookingDetailsComponent } from './customer/booking-details/booking-details.component';
 import { CheckBookingComponent } from './customer/check-booking/check-booking.component';
 import { AppointmentComponent } from './customer/appointment/appointment.component';
+import {FlutterwaveModule} from "flutterwave-angular-v3";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppointmentComponent } from './customer/appointment/appointment.compone
       ReactiveFormsModule,
       CalendarModule,
       BrowserAnimationsModule,
-      AdminModule
+      AdminModule,
+      FlutterwaveModule
     ],
   providers: [],
   bootstrap: [AppComponent]
